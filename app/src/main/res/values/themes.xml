@@ -3,21 +3,26 @@
     <style name="CustomActionBarTheme" parent="@style/Theme.AppCompat.Light.DarkActionBar">
         <!-- android:actionBarStyle requires API level 11 -->
         <!--<item name="android:actionBarStyle">@style/CustomActionBarStyle</item>-->
-
         <!-- Support library compatibility -->
         <item name="actionBarStyle">@style/CustomActionBarStyle</item>
+        <!--<item name="colorPrimary">@color/customColor</item>-->
+        <!--<item name="android:textColorPrimary">@android:color/holo_blue_dark</item>-->
+        <!--<item name="android:textColor">@android:color/holo_blue_bright</item>-->
     </style>
-    <style name="CustomActionBarStyle" parent="@style/Widget.AppCompat.Light.ActionBar.Solid.Inverse">
+    <style name="CustomActionBarStyle" parent="Widget.AppCompat.Light.ActionBar.Solid.Inverse">
         <!--<item name="android:background">@drawable/actionbar_background</item>-->
+        <!--<item name="android:titleTextStyle">@style/MyActionBarTitleText</item>-->
 
         <!-- Support library compatibility -->
         <item name="background">@drawable/actionbar_background</item>
-        <item name="titleTextColor">@style/MyActionBarTitleText</item>
+        <item name="titleTextStyle">@style/MyActionBarTitleText</item>
+        <!--<item name="android:textStyle">@style/MyActionBarTitleText</item>-->
     </style>
 
     <!-- ActionBar title text -->
     <style name="MyActionBarTitleText"
            parent="@style/TextAppearance.AppCompat.Widget.ActionBar.Title">
+        <!--<item name="android:textColor">@android:color/holo_blue_bright</item>-->
         <item name="android:textColor">@color/customColor</item>
     </style>
 </resources>
