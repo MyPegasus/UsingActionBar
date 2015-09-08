@@ -1,23 +1,83 @@
 package com.example.mypegasus.usingactionbar;
 
 import android.content.Intent;
-import android.support.v7.app.ActionBar;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.support.v7.internal.app.ToolbarActionBar;
+import android.support.v7.app.ActionBarActivity;
+import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 
-public class MainActivity extends AppCompatActivity {
+//public class MainActivity extends AppCompatActivity {
+public class MainActivity extends ActionBarActivity {
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_main);
-
+		/**
+		 * actionBar.setNavigationMode、newTab()、addTab()都已经deprecated
+		 * */
+		/*
 		ActionBar actionBar = getSupportActionBar();
-//		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);// deprecated
+		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);// deprecated
 
+		ActionBar.TabListener tabListener = new ActionBar.TabListener() {
+			@Override
+			public void onTabSelected(ActionBar.Tab tab, FragmentTransaction ft) {
+				Toast.makeText(MainActivity.this, "Tab Selected " + tab.getPosition(), Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onTabUnselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+			}
+
+			@Override
+			public void onTabReselected(ActionBar.Tab tab, FragmentTransaction ft) {
+
+			}
+		};
+
+		for (int i = 0; i < 3; i++) {
+			ActionBar.Tab tab = actionBar.newTab();
+			tab.setText("Tab" + i);
+			tab.setTabListener(tabListener);
+			actionBar.addTab(tab);
+		}*/
+
+		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		toolbar.setTitle("Title");
+		if (toolbar != null) {
+			setSupportActionBar(toolbar);
+			// 并没有起作用
+			toolbar.inflateMenu(R.menu.menu_main);
+		}
+
+		toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
+			@Override
+			public boolean onMenuItemClick(MenuItem item) {
+				int id = item.getItemId();
+
+				switch (id) {
+					case R.id.home:
+						break;
+					case android.R.id.home:// 这个才是左上角图标id
+						finish();
+						break;
+					case R.id.action_search:
+						//Toast.makeText(this, "Action_Search", Toast.LENGTH_SHORT).show();
+						startActivity(new Intent(MainActivity.this, SecondActivity.class));
+						break;
+					case R.id.action_setting:
+						//Toast.makeText(this, "Action_Setting", Toast.LENGTH_SHORT).show();
+						startActivity(new Intent(MainActivity.this, ThirdActivity.class));
+						break;
+				}
+				return false;
+			}
+		});
+		toolbar.setNavigationIcon(R.mipmap.ic_launcher);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
@@ -28,7 +88,7 @@ public class MainActivity extends AppCompatActivity {
 		return true;
 	}
 
-	@Override
+	/*@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
@@ -36,9 +96,9 @@ public class MainActivity extends AppCompatActivity {
 		int id = item.getItemId();
 
 		//noinspection SimplifiableIfStatement
-		/*if (id == R.id.action_settings) {
+		*//*if (id == R.id.action_settings) {
 			return true;
-		}*/
+		}*//*
 
 		switch (id) {
 			case R.id.home:
@@ -57,5 +117,5 @@ public class MainActivity extends AppCompatActivity {
 		}
 
 		return super.onOptionsItemSelected(item);
-	}
+	}*/
 }

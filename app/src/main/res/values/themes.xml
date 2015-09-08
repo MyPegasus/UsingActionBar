@@ -25,4 +25,5 @@
         <!--<item name="android:textColor">@android:color/holo_blue_bright</item>-->
         <item name="android:textColor">@color/customColor</item>
     </style>
+
 </resources>
