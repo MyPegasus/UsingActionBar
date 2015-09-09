@@ -2,11 +2,13 @@ package com.example.mypegasus.usingactionbar;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.TabLayout;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 //public class MainActivity extends AppCompatActivity {
 public class MainActivity extends ActionBarActivity {
@@ -79,6 +81,31 @@ public class MainActivity extends ActionBarActivity {
 		});
 		toolbar.setNavigationIcon(R.mipmap.ic_launcher);
 		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
+		TabLayout tabs = (TabLayout) findViewById(R.id.sliding_tabs);
+
+		for (int i = 0; i < 3; i++) {
+			TabLayout.Tab tab = tabs.newTab();
+			tab.setText("Tab" + i);
+			tabs.addTab(tab);
+		}
+
+		tabs.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+			@Override
+			public void onTabSelected(TabLayout.Tab tab) {
+				Toast.makeText(MainActivity.this, "Tab Selected " + tab.getPosition(), Toast.LENGTH_SHORT).show();
+			}
+
+			@Override
+			public void onTabUnselected(TabLayout.Tab tab) {
+
+			}
+
+			@Override
+			public void onTabReselected(TabLayout.Tab tab) {
+
+			}
+		});
 	}
 
 	@Override
