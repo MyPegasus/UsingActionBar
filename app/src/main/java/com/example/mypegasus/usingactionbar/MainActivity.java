@@ -3,15 +3,21 @@ package com.example.mypegasus.usingactionbar;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.TabLayout;
+import android.support.v4.app.FragmentTransaction;
+import android.support.v4.view.MenuItemCompat;
+import android.support.v7.app.ActionBar;
 import android.support.v7.app.ActionBarActivity;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.ShareActionProvider;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.Toast;
 
-//public class MainActivity extends AppCompatActivity {
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends AppCompatActivity {
+//public class MainActivity extends ActionBarActivity {
+
+	private ShareActionProvider mShareActionProvider;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -20,8 +26,7 @@ public class MainActivity extends ActionBarActivity {
 		/**
 		 * actionBar.setNavigationMode、newTab()、addTab()都已经deprecated
 		 * */
-		/*
-		ActionBar actionBar = getSupportActionBar();
+		/*ActionBar actionBar = getSupportActionBar();
 		actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_TABS);// deprecated
 
 		ActionBar.TabListener tabListener = new ActionBar.TabListener() {
@@ -48,7 +53,10 @@ public class MainActivity extends ActionBarActivity {
 			actionBar.addTab(tab);
 		}*/
 
-		Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+		/**
+		 * 使用toolbar 和 tabLayout
+		 * */
+		/*Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
 		toolbar.setTitle("Title");
 		if (toolbar != null) {
 			setSupportActionBar(toolbar);
@@ -80,7 +88,6 @@ public class MainActivity extends ActionBarActivity {
 			}
 		});
 		toolbar.setNavigationIcon(R.mipmap.ic_launcher);
-		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
 		TabLayout tabs = (TabLayout) findViewById(R.id.sliding_tabs);
 
@@ -105,17 +112,29 @@ public class MainActivity extends ActionBarActivity {
 			public void onTabReselected(TabLayout.Tab tab) {
 
 			}
-		});
+		});*/
+
+		getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 	}
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		// Inflate the menu; this adds items to the action bar if it is present.
 		getMenuInflater().inflate(R.menu.menu_main, menu);
+
+		MenuItem shareItem = menu.findItem(R.id.action_share);
+		mShareActionProvider = (ShareActionProvider) MenuItemCompat.getActionProvider(shareItem);
+		mShareActionProvider.setShareIntent(getDefaultIntent());
 		return true;
 	}
 
-	/*@Override
+	private Intent getDefaultIntent() {
+		Intent intent = new Intent(Intent.ACTION_SEND);
+		intent.setType("image/*");
+		return intent;
+	}
+
+	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		// Handle action bar item clicks here. The action bar will
 		// automatically handle clicks on the Home/Up button, so long
@@ -123,9 +142,9 @@ public class MainActivity extends ActionBarActivity {
 		int id = item.getItemId();
 
 		//noinspection SimplifiableIfStatement
-		*//*if (id == R.id.action_settings) {
+		/*if (id == R.id.action_settings) {
 			return true;
-		}*//*
+		}*/
 
 		switch (id) {
 			case R.id.home:
@@ -135,14 +154,16 @@ public class MainActivity extends ActionBarActivity {
 				break;
 			case R.id.action_search:
 				//Toast.makeText(this, "Action_Search", Toast.LENGTH_SHORT).show();
-				startActivity(new Intent(this, SecondActivity.class));
+//				startActivity(new Intent(this, SecondActivity.class));
+				getSupportActionBar().hide();
 				break;
 			case R.id.action_setting:
 				//Toast.makeText(this, "Action_Setting", Toast.LENGTH_SHORT).show();
-				startActivity(new Intent(this, ThirdActivity.class));
+//				startActivity(new Intent(this, ThirdActivity.class));
+				getSupportActionBar().show();
 				break;
 		}
 
 		return super.onOptionsItemSelected(item);
-	}*/
+	}
 }
